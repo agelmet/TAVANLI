@@ -12,27 +12,26 @@
     <style>
         *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
         :root {
-            /* Νέα Παλέτα: Broken White, Cypress Green, Mint */
+            /* Νέα Παλέτα με τις διορθώσεις: Broken White, Cypress Green, Soft Mint, Pastel Mint Hover */
             --cypress: #1f5103;
             --mint-soft: #bfc4a8;
-            --mint-bright: #96eea6;
-            --cream: #fafbf9; /* Σπασμένο λευκό φόντο */
+            --mint-hover: #b7d5c9; /* Πιο παστέλ απόχρωση για τα hovers */
+            --cream: #f4f5f0; /* Ελαφρώς πιο σκούρο/ζεστό σπασμένο λευκό για καλύτερη αντίθεση */
             
             /* Background tones */
             --stone-50: var(--cream); 
-            --stone-100: #f4f6f0; 
-            --stone-200: #e8ece1; 
-            --stone-300: #dce2d2;
+            --stone-100: #ebece4; 
+            --stone-200: #e0e2d8; 
             
-            /* Text tones based on Cypress (#1f5103) */
-            --stone-400: rgba(31, 81, 3, 0.6); 
-            --stone-500: rgba(31, 81, 3, 0.7); 
-            --stone-600: rgba(31, 81, 3, 0.85); 
-            --stone-700: var(--cypress); 
+            /* Σκούρα, συμπαγή χρώματα κειμένου για ξεκούραστη ανάγνωση (Αυξημένο Contrast) */
+            --stone-400: #3a6b18; 
+            --stone-500: #29520e; 
+            --stone-600: #1b3807; 
+            --stone-700: #142a05; 
             --stone-800: var(--cypress); 
-            --stone-900: #103001;
+            --stone-900: #0a1c01;
             
-            /* Accents based on Mint (#bfc4a8) */
+            /* Accents */
             --sage: var(--mint-soft); 
             --sage-light: #d8ddc7; 
             --sage-muted: #eef1e6; 
@@ -44,10 +43,10 @@
         }
         
         html { scroll-behavior: smooth; font-size: 16px; }
-        body { font-family: var(--sans); background: var(--cream); color: var(--stone-700); line-height: 1.7; font-weight: 300; overflow-x: hidden; -webkit-font-smoothing: antialiased; position: relative; }
+        body { font-family: var(--sans); background: var(--cream); color: var(--stone-700); line-height: 1.7; font-weight: 400; overflow-x: hidden; -webkit-font-smoothing: antialiased; position: relative; }
         
-        /* Πλήρης στοίχιση (Justify) για τα κύρια κείμενα */
-        p.justified { text-align: justify; hyphens: auto; }
+        /* Πλήρης στοίχιση (Justify) με διορθωμένα rivers */
+        p.justified { text-align: justify; text-justify: inter-word; hyphens: auto; -webkit-hyphens: auto; }
 
         ::selection { background: var(--sage-light); color: var(--stone-800); }
         img { max-width: 100%; display: block; }
@@ -55,27 +54,14 @@
         button { border: none; background: none; cursor: pointer; font-family: inherit; }
         .container { width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 clamp(1.5rem, 4vw, 3rem); }
         
-        .label { font-family: var(--sans); font-size: 0.75rem; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: var(--stone-500); }
-        .section-title { font-family: var(--serif); font-size: clamp(2rem, 4.5vw, 3.5rem); font-weight: 400; color: var(--stone-800); line-height: 1.15; }
-        .section-subtitle { font-size: 0.95rem; color: var(--stone-500); max-width: 560px; line-height: 1.8; }
-
-        /* Υδατογράφημα στο κάτω μέρος της σελίδας */
-        .page-watermark {
-            position: absolute;
-            bottom: 5%;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 60vw;
-            max-width: 800px;
-            opacity: 0.03;
-            pointer-events: none;
-            z-index: 0;
-        }
+        .label { font-family: var(--sans); font-size: 0.75rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--stone-500); }
+        
+        /* Μειωμένα μεγέθη επικεφαλίδων για κομψότητα και ισορροπία */
+        .section-title { font-family: var(--serif); font-size: clamp(1.75rem, 3.5vw, 2.75rem); font-weight: 500; color: var(--stone-800); line-height: 1.15; }
+        .section-subtitle { font-size: 0.95rem; color: var(--stone-600); max-width: 560px; line-height: 1.8; }
 
         @keyframes fadeUp { from { opacity: 0; transform: translateY(40px); } to { opacity: 1; transform: translateY(0); } }
         @keyframes scaleIn { from { opacity: 0; transform: scale(0.92); } to { opacity: 1; transform: scale(1); } }
-        @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-12px); } }
-        @keyframes rotateBorder { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
 
         .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.9s var(--ease-out), transform 0.9s var(--ease-out); }
         .reveal.visible { opacity: 1; transform: translateY(0); }
@@ -83,7 +69,7 @@
 
         /* ═══ HEADER ═══ */
         .header { position:fixed; top:0; left:0; right:0; z-index:1000; padding:1.25rem 0; transition:all 0.5s var(--ease-out); }
-        .header.scrolled { background:rgba(250, 251, 249, 0.95); backdrop-filter:blur(20px); -webkit-backdrop-filter:blur(20px); padding:0.75rem 0; box-shadow:0 1px 0 rgba(0,0,0,0.04); }
+        .header.scrolled { background:rgba(244, 245, 240, 0.95); backdrop-filter:blur(20px); -webkit-backdrop-filter:blur(20px); padding:0.75rem 0; box-shadow:0 1px 0 rgba(0,0,0,0.04); }
         .header-inner { display:flex; align-items:center; justify-content:space-between; }
         .logo-link { display:flex; align-items:center; gap:1rem; }
         
@@ -91,18 +77,17 @@
         
         .logo-text { display:flex; flex-direction:column; }
         .logo-name { font-family:var(--serif); font-size:1.15rem; font-weight:600; color:var(--stone-800); line-height:1.2; }
-        .logo-role { font-size:0.6rem; font-weight:500; letter-spacing:0.15em; text-transform:uppercase; color: var(--stone-500); }
+        .logo-role { font-size:0.6rem; font-weight:600; letter-spacing:0.15em; text-transform:uppercase; color: var(--stone-600); }
         
-        /* Μικρότερο Font & Κενά για να χωράνε σε μία γραμμή */
         .nav-desktop { display:flex; align-items:center; gap:1.2rem; }
-        .nav-desktop a { font-size:0.75rem; font-weight:600; letter-spacing:0.05em; text-transform:uppercase; color:var(--stone-700); position:relative; transition:color 0.3s; }
+        .nav-desktop a { font-size:0.75rem; font-weight:700; letter-spacing:0.05em; text-transform:uppercase; color:var(--stone-700); position:relative; transition:color 0.3s; }
         .nav-desktop a::after { content:''; position:absolute; bottom:-4px; left:0; width:0; height:1.5px; background:var(--sage); transition:width 0.4s var(--ease-out); }
         .nav-desktop a:hover { color:var(--stone-900); }
         .nav-desktop a:hover::after { width:100%; }
         
         .nav-cta { display:inline-flex; align-items:center; gap:0.5rem; padding:0.6rem 1.25rem; background:var(--mint-soft); color:var(--cypress)!important; border-radius:100px; font-weight:700!important; transition:all 0.4s var(--ease-out); }
         .nav-cta::after { display:none!important; }
-        .nav-cta:hover { background:var(--mint-bright)!important; transform:translateY(-1px); box-shadow:0 8px 30px rgba(150, 238, 166, 0.4); }
+        .nav-cta:hover { background:var(--mint-hover)!important; transform:translateY(-1px); box-shadow:0 8px 30px rgba(183, 213, 201, 0.4); }
         
         .hamburger { display:none; flex-direction:column; gap:5px; padding:8px; z-index:1001; }
         .hamburger span { width:24px; height:1.5px; background:var(--stone-700); transition:all 0.3s var(--ease-out); transform-origin:center; }
@@ -112,7 +97,7 @@
         
         .nav-mobile { display:none; position:fixed; top:0; left:0; right:0; bottom:0; background:var(--cream); z-index:999; flex-direction:column; align-items:center; justify-content:center; gap:2rem; opacity:0; pointer-events:none; transition:opacity 0.4s; }
         .nav-mobile.open { opacity:1; pointer-events:all; }
-        .nav-mobile a { font-family:var(--serif); font-size:1.8rem; font-weight:300; color:var(--stone-700); transition:color 0.3s; }
+        .nav-mobile a { font-family:var(--serif); font-size:1.8rem; font-weight:500; color:var(--stone-700); transition:color 0.3s; }
         .nav-mobile a:hover { color:var(--sage-deep); }
         @media(max-width:950px) { .nav-desktop{display:none} .hamburger{display:flex} .nav-mobile{display:flex} }
 
@@ -121,36 +106,21 @@
         
         .hero-inner { display:flex; justify-content:center; align-items:center; width:100%; max-width:900px; position:relative; z-index:1; }
         
-        .hero-animated-border { position: relative; border-radius: 24px; width: 100%; overflow: hidden; background: var(--cream); z-index: 1; padding: 4rem 2rem; animation: fadeUp 1s var(--ease-out) 0.2s both; }
-        
-        /* Κινούμενο Border γύρω από το Hero */
-        .hero-animated-border::before {
-            content: '';
-            position: absolute;
-            top: -50%; left: -50%; width: 200%; height: 200%;
-            background: conic-gradient(from 0deg, transparent 60%, var(--cypress) 100%);
-            animation: rotateBorder 4s linear infinite;
-            z-index: -2;
-        }
-        .hero-animated-border::after {
-            content: '';
-            position: absolute;
-            inset: 3px; /* Πάχος της γραμμής */
-            background: var(--cream);
-            border-radius: 21px;
-            z-index: -1;
-        }
+        /* Στατικό Frame */
+        .hero-animated-border { position: relative; border-radius: 24px; width: 100%; background: var(--cream); z-index: 1; padding: 4rem 2rem; border: 3px solid var(--cypress); animation: fadeUp 1s var(--ease-out) 0.2s both; }
 
         .hero-content { display:flex; flex-direction:column; align-items:center; text-align:center; }
-        .hero-title { font-family:var(--serif); font-size:clamp(2.5rem,5.5vw,4.5rem); font-weight:400; color:var(--cypress); line-height:1.15; margin-bottom:1.5rem; }
-        .hero-title em { font-style:italic; color: var(--mint-soft); }
-        .hero-desc { font-size:1.15rem; font-style: italic; color:var(--stone-600); max-width:600px; line-height:1.8; margin-bottom: 2.5rem; }
+        
+        /* Προσθήκη overflow-wrap & hyphens για αποφυγή κοψίματος λέξεων στα κινητά */
+        .hero-title { font-family:var(--serif); font-size:clamp(2rem, 5vw, 3.5rem); font-weight:500; color:var(--cypress); line-height:1.15; margin-bottom:1.5rem; overflow-wrap: break-word; hyphens: auto; -webkit-hyphens: auto; }
+        .hero-title em { font-style:italic; color: var(--stone-500); }
+        .hero-desc { font-size:1.15rem; font-style: italic; color:var(--stone-600); max-width:600px; line-height:1.8; margin-bottom: 2.5rem; overflow-wrap: break-word; }
         
         .hero-actions { display:flex; flex-direction:column; align-items:center; gap:1rem; }
         .btn-primary { display:inline-flex; align-items:center; gap:0.75rem; padding:1.1rem 2.5rem; background:var(--mint-soft); color:var(--cypress); border-radius:100px; font-size:0.8rem; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; transition:all 0.4s var(--ease-out); }
-        .btn-primary:hover { background:var(--mint-bright); transform:translateY(-2px); box-shadow:0 12px 30px rgba(150, 238, 166, 0.4); }
+        .btn-primary:hover { background:var(--mint-hover); transform:translateY(-2px); box-shadow:0 12px 30px rgba(183, 213, 201, 0.4); }
         
-        .hero-subtext { font-size: 0.85rem; color: var(--stone-500); margin-top: 1rem; max-width: 450px; line-height: 1.6; }
+        .hero-subtext { font-size: 0.85rem; color: var(--stone-600); margin-top: 1rem; max-width: 450px; line-height: 1.6; }
 
         @media(max-width:900px) {
             .hero-animated-border { padding: 3rem 1.5rem; }
@@ -160,7 +130,8 @@
         .content-section { padding:clamp(5rem,10vw,8rem) 0; }
         .about-inner { display:grid; grid-template-columns:0.4fr 0.6fr; gap:clamp(3rem,6vw,6rem); align-items:center; }
         .about-image-col { position:relative; }
-        .about-image-wrap { border-radius:24px; overflow:hidden; box-shadow:0 30px 80px rgba(0,0,0,0.07); animation:float 7s ease-in-out infinite; background:#ffffff; padding: 1rem; }
+        /* Στατική Εικόνα Προφίλ */
+        .about-image-wrap { border-radius:24px; overflow:hidden; box-shadow:0 15px 40px rgba(0,0,0,0.05); background:#ffffff; padding: 1rem; }
         .about-image-wrap img { width:100%; height:auto; object-fit:contain; border-radius: 16px; }
         .about-image-accent { position:absolute; top:-15px; left:-15px; width:100%; height:100%; border-radius:24px; border:1px solid var(--sage); z-index:-1; }
         
@@ -184,7 +155,7 @@
         .service-card:hover { transform:translateY(-4px); box-shadow:0 15px 40px rgba(0,0,0,0.04); }
         .service-card:hover::after { width:100%; }
         
-        .service-card h3 { font-family:var(--serif); font-size:1.45rem; font-weight:600; color:var(--stone-800); margin-bottom:0.5rem; }
+        .service-card h3 { font-family:var(--serif); font-size:1.25rem; font-weight:600; color:var(--stone-800); margin-bottom:0.5rem; }
         .service-includes { font-size:0.75rem; color:var(--stone-700); font-weight:700; letter-spacing:0.05em; margin-bottom:1.25rem; display: inline-block; padding: 0.3rem 0.8rem; background: var(--sage-muted); border-radius: 100px; }
         .service-card p { font-size:0.95rem; color:var(--stone-600); line-height:1.8; }
         @media(max-width:768px) { .services-grid{grid-template-columns:1fr} }
@@ -195,7 +166,7 @@
         .faq-header { text-align: center; margin-bottom: 4rem; }
         .faq-item { margin-bottom: 3rem; padding-bottom: 2rem; border-bottom: 1px solid var(--stone-200); }
         .faq-item:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
-        .faq-question { font-family: var(--serif); font-size: 1.4rem; font-weight: 600; color: var(--stone-800); margin-bottom: 1rem; line-height: 1.3; }
+        .faq-question { font-family: var(--serif); font-size: 1.25rem; font-weight: 600; color: var(--stone-800); margin-bottom: 1rem; line-height: 1.3; }
         .faq-answer { font-size: 0.95rem; color: var(--stone-600); line-height: 1.8; }
 
         /* ═══ REVIEWS ═══ */
@@ -223,26 +194,26 @@
         .contact-alt-text { font-size: 1.05rem; color: var(--stone-600); line-height: 1.8; margin-bottom: 2rem; }
         .social-buttons { display: flex; gap: 1rem; margin-bottom: 3rem; }
         .btn-mint { display: inline-flex; align-items: center; justify-content: center; padding: 0.8rem 1.5rem; background: var(--mint-soft); color: var(--cypress); border-radius: 100px; font-weight: 700; font-size: 0.8rem; letter-spacing: 0.1em; text-transform: uppercase; transition: all 0.3s; flex: 1; text-align: center; }
-        .btn-mint:hover { background: var(--mint-bright); color: var(--cypress); box-shadow: 0 8px 20px rgba(150, 238, 166, 0.3); }
+        .btn-mint:hover { background: var(--mint-hover); color: var(--cypress); box-shadow: 0 8px 20px rgba(183, 213, 201, 0.3); }
         
         .contact-info-block { border-top: 1px solid var(--stone-200); padding-top: 2rem; }
         .contact-info-block p { font-size: 0.95rem; color: var(--stone-700); margin-bottom: 0.5rem; font-weight: 500; }
         
-        .contact-footer { text-align: center; font-size: 0.9rem; color: var(--stone-500); max-width: 600px; margin: 0 auto 4rem; }
+        .contact-footer { text-align: center; font-size: 0.9rem; color: var(--stone-600); max-width: 600px; margin: 0 auto 4rem; }
         
-        .business-card-wrap { text-align:center; max-width: 500px; margin: 0 auto; }
-        .business-card-wrap img { width: 100%; height: auto; object-fit: contain; border-radius: 16px; box-shadow: 0 20px 50px rgba(0,0,0,0.08); transition: transform 0.5s var(--ease-out); }
-        .business-card-wrap img:hover { transform: translateY(-5px); box-shadow: 0 25px 60px rgba(0,0,0,0.12); }
+        /* Μικρότερη Κάρτα για να μην φαίνεται θολή */
+        .business-card-wrap { text-align:center; max-width: 320px; margin: 0 auto; }
+        .business-card-wrap img { width: 100%; height: auto; object-fit: contain; border-radius: 8px; box-shadow: 0 10px 30px rgba(0,0,0,0.08); }
 
         @media(max-width:768px) { .contact-two-col { grid-template-columns: 1fr; gap: 3rem; } .social-buttons { flex-direction: column; } }
 
         /* ═══ FOOTER ═══ */
         .footer { padding:2rem 0; border-top:1px solid var(--stone-200); position: relative; z-index: 10; background: var(--cream); }
         .footer-inner { display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:1rem; }
-        .footer-copy { font-size:0.75rem; color:var(--stone-500); }
-        .footer-credit { font-size:0.7rem; color:var(--stone-500); }
-        .footer-credit a { color:var(--sage-deep); font-weight:600; transition:color 0.3s; }
-        .footer-credit a:hover { color:var(--stone-800); }
+        .footer-copy { font-size:0.75rem; color:var(--stone-600); }
+        .footer-credit { font-size:0.7rem; color:var(--stone-600); }
+        .footer-credit a { color:var(--sage-deep); font-weight:700; transition:color 0.3s; }
+        .footer-credit a:hover { color:var(--stone-900); }
     </style>
 </head>
 <body>
@@ -311,7 +282,7 @@
         </div>
         <div class="content-block">
             <p class="content-text justified reveal reveal-delay-1">Η θεμελιώδης αρχή της συστημικής σκέψης είναι ότι καμία ανθρώπινη εμπειρία δεν αναπτύσσεται απομονωμένα. Έτσι, βιώματα όπως το έντονο άγχος, η θλίψη, οι φοβίες και η μοναξιά, η διαχείριση μιας απώλειας, αλλά και οι προκλήσεις που σχετίζονται με τη γονεϊκότητα, την ταυτότητα ή τη σεξουαλικότητα, παύουν να αντιμετωπίζονται ως μεμονωμένα ατομικά συμπτώματα.</p>
-            <p class="content-text justified reveal reveal-delay-1">Μέσα από τη συστημική ματιά, όλες αυτές οι δυσκολίες αποκτούν μια εντελώς νέα ερμηνεία όταν συνδεθούν με τα δίκτυα στα οποία συμμετέχει το άτομο—από το οικογενειακό, συντροφικό και φιλικό περιβάλλον, μέχρι τον εργασιακό χώρο και το ευρύτερο κοινωνικοπολιτικό πλαίσιο. Αυτή η οπτική αμφισβητεί την κλασική στάση της "αυθεντίας" του θεραπευτή και τις άκαμπτες κλινικές διαγνώσεις, προκρίνοντας μια κοινή, ισότιμη πορεία.</p>
+            <p class="content-text justified reveal reveal-delay-1">Μέσα από τη συστημική ματιά, όλες αυτές οι δυσκολίες αποκτούν μια εντελώς νέα ερμηνεία όταν συνδεθούν με τα δίκτυα στα οποία συμμετέχει το άτομο από το οικογενειακό, συντροφικό και φιλικό περιβάλλον, μέχρι τον εργασιακό χώρο και το ευρύτερο κοινωνικοπολιτικό πλαίσιο. Αυτή η οπτική αμφισβητεί την κλασική στάση της "αυθεντίας" του θεραπευτή και τις άκαμπτες κλινικές διαγνώσεις, προκρίνοντας μια κοινή, ισότιμη πορεία.</p>
             <p class="content-text justified reveal reveal-delay-2">Με κύρια εργαλεία τον ανοιχτό διάλογο και μια βαθιά, διερευνητική περιέργεια, φωτίζεται η πολυπλοκότητα της ζωής του ατόμου και αναδεικνύονται οι επαναλαμβανόμενοι κύκλοι συμπεριφοράς που συχνά προκαλούν στασιμότητα στο παρόν. Μέσα από αυτή τη συνεργασία, η έμφαση μετατοπίζεται από την απλή περιγραφή του προβλήματος στην ουσιαστική ανακούφιση, στην ανακάλυψη των προσωπικών αποθεμάτων ανθεκτικότητας και στη διαμόρφωση νέων, πιο λειτουργικών τρόπων συνύπαρξης και επικοινωνίας.</p>
         </div>
     </div>
@@ -342,7 +313,7 @@
             <div class="service-card reveal reveal-delay-1">
                 <h3>Συμβουλευτική γονέων</h3>
                 <span class="service-includes">50 λεπτά</span>
-                <p class="justified">Εστίαση στην επεξεργασία και την ενδυνάμωση του γονεϊκού ρόλου μέσα από τη συστημική οπτική. Μέσα από τη συνεργασία μας, επανεξετάζονται τα πρότυπα επικοινωνίας και οριοθέτησης, με σκοπό τη λειτουργική διαχείριση των κρίσεων και των μεταβάσεων της οικογένειας.</p>
+                <p class="justified">Υποστήριξη και επεξεργασία του γονεϊκού ρόλου μέσα από τη συστημική οπτική. Μέσα από τη συνεργασία μας, επανεξετάζονται τα πρότυπα επικοινωνίας και οριοθέτησης, με σκοπό τη λειτουργική διαχείριση των κρίσεων και των μεταβάσεων της οικογένειας.</p>
             </div>
         </div>
     </div>
@@ -357,12 +328,12 @@
         
         <div class="faq-item reveal">
             <h3 class="faq-question">Τι ισχύει με το θεραπευτικό απόρρητο;</h3>
-            <p class="faq-answer justified">Η διασφάλιση της εμπιστευτικότητας αποτελεί θεμέλιο της θεραπευτικής σχέσης. Όσα συζητώνται μέσα στις συνεδρίες καλύπτονται πλήρως από το επαγγελματικό δεοντολογικό απόρρητο των ψυχολόγων, δημιουργώντας ένα απόλυτα προστατευμένο και ασφαλές περιβάλλον.</p>
+            <p class="faq-answer justified">Η διασφάλιση της εμπιστευτικότητας αποτελεί θεμέλιο της θεραπευτικής σχέσης. Όσα συζητώνται μέσα στις συνεδρίες καλύπτονται πλήρως από το επαγγελματικό και δεοντολογικό απόρρητο των ψυχολόγων, δημιουργώντας ένα απόλυτα προστατευμένο και ασφαλές περιβάλλον.</p>
         </div>
         
         <div class="faq-item reveal">
             <h3 class="faq-question">Πόσο διαρκεί συνολικά μια ψυχοθεραπευτική διαδικασία;</h3>
-            <p class="faq-answer justified">Η ψυχοθεραπεία δεν έχει προκαθορισμένη διάρκεια, καθώς κάθε άτομο και κάθε οικογένεια χρειάζεται τον δικό της χρόνο για να νοηματοδοτήσει τις εμπειρίες της και να ανακαλύψει νέες δυνατότητες και επιλογές. Η συχνότητα είναι συνήθως εβδομαδιαία, και η πορεία αξιολογείται από κοινού σε τακτικά διαστήματα με βάση τους στόχους που έχουν τεθεί.</p>
+            <p class="faq-answer justified">Η ψυχοθεραπεία δεν έχει προκαθορισμένη διάρκεια, καθώς κάθε άτομο και κάθε οικογένεια χρειάζεται τον δικό της χρόνο για να νοηματοδοτήσει τις εμπειρίες της και να ανακαλύψει νέες δυνατότητες και επιλογές. Η συχνότητα είναι συνήθως εβδομαδιαία, και η πορεία αξιολογείται από κοινού ανά τακτά διαστήματα με βάση τους στόχους που έχουν τεθεί.</p>
         </div>
         
         <div class="faq-item reveal">
@@ -451,13 +422,13 @@
             <div class="contact-alt reveal reveal-delay-1">
                 <p class="contact-alt-text justified">Εναλλακτικά, αν προτιμάτε μια πιο άμεση επικοινωνία, μπορείτε να μου στείλετε μήνυμα στο WhatsApp ή στο Viber.</p>
                 <div class="social-buttons">
-                    <a href="#" class="btn-mint">WhatsApp</a>
-                    <a href="#" class="btn-mint">Viber</a>
+                    <a href="https://wa.me/306909905513" target="_blank" rel="noopener noreferrer" class="btn-mint">WhatsApp</a>
+                    <a href="viber://chat?number=%2B306909905513" class="btn-mint">Viber</a>
                 </div>
                 
                 <div class="contact-info-block">
-                    <p>Email: info@tavanli.gr</p>
-                    <p>Τηλέφωνο: 210 744 0003</p>
+                    <p>Email: ctavanli@yahoo.gr</p>
+                    <p>Τηλέφωνο: +30 690 990 5513</p>
                 </div>
             </div>
         </div>
@@ -468,8 +439,6 @@
             <img src="https://github.com/agelmet/TAVANLI/blob/main/tav2.jpg?raw=true" alt="Επαγγελματική Κάρτα">
         </div>
     </div>
-    
-    <img src="https://github.com/agelmet/TAVANLI/blob/main/tavlogo.png?raw=true" alt="" class="page-watermark">
 </section>
 
 <footer class="footer">
