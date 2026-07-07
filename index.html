@@ -12,18 +12,15 @@
     <style>
         *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
         :root {
-            /* Νέα Παλέτα με τις διορθώσεις: Broken White, Cypress Green, Soft Mint, Pastel Mint Hover */
             --cypress: #1f5103;
             --mint-soft: #bfc4a8;
-            --mint-hover: #b7d5c9; /* Πιο παστέλ απόχρωση για τα hovers */
-            --cream: #f4f5f0; /* Ελαφρώς πιο σκούρο/ζεστό σπασμένο λευκό για καλύτερη αντίθεση */
+            --mint-hover: #b7d5c9; 
+            --cream: #f4f5f0; 
             
-            /* Background tones */
             --stone-50: var(--cream); 
             --stone-100: #ebece4; 
             --stone-200: #e0e2d8; 
             
-            /* Σκούρα, συμπαγή χρώματα κειμένου για ξεκούραστη ανάγνωση (Αυξημένο Contrast) */
             --stone-400: #3a6b18; 
             --stone-500: #29520e; 
             --stone-600: #1b3807; 
@@ -31,7 +28,6 @@
             --stone-800: var(--cypress); 
             --stone-900: #0a1c01;
             
-            /* Accents */
             --sage: var(--mint-soft); 
             --sage-light: #d8ddc7; 
             --sage-muted: #eef1e6; 
@@ -45,7 +41,6 @@
         html { scroll-behavior: smooth; font-size: 16px; }
         body { font-family: var(--sans); background: var(--cream); color: var(--stone-700); line-height: 1.7; font-weight: 400; overflow-x: hidden; -webkit-font-smoothing: antialiased; position: relative; }
         
-        /* Πλήρης στοίχιση (Justify) με διορθωμένα rivers */
         p.justified { text-align: justify; text-justify: inter-word; hyphens: auto; -webkit-hyphens: auto; }
 
         ::selection { background: var(--sage-light); color: var(--stone-800); }
@@ -55,13 +50,10 @@
         .container { width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 clamp(1.5rem, 4vw, 3rem); }
         
         .label { font-family: var(--sans); font-size: 0.75rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--stone-500); }
-        
-        /* Μειωμένα μεγέθη επικεφαλίδων για κομψότητα και ισορροπία */
         .section-title { font-family: var(--serif); font-size: clamp(1.75rem, 3.5vw, 2.75rem); font-weight: 500; color: var(--stone-800); line-height: 1.15; }
         .section-subtitle { font-size: 0.95rem; color: var(--stone-600); max-width: 560px; line-height: 1.8; }
 
         @keyframes fadeUp { from { opacity: 0; transform: translateY(40px); } to { opacity: 1; transform: translateY(0); } }
-        @keyframes scaleIn { from { opacity: 0; transform: scale(0.92); } to { opacity: 1; transform: scale(1); } }
 
         .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.9s var(--ease-out), transform 0.9s var(--ease-out); }
         .reveal.visible { opacity: 1; transform: translateY(0); }
@@ -102,38 +94,37 @@
         @media(max-width:950px) { .nav-desktop{display:none} .hamburger{display:flex} .nav-mobile{display:flex} }
 
         /* ═══ HERO ═══ */
-        .hero { min-height:100vh; display:flex; align-items:center; justify-content:center; position:relative; overflow:hidden; padding-top:100px; }
+        .hero { min-height:65vh; padding-top: 120px; padding-bottom: 60px; display:flex; align-items:center; justify-content:center; position:relative; overflow:hidden; }
         
         .hero-inner { display:flex; justify-content:center; align-items:center; width:100%; max-width:900px; position:relative; z-index:1; }
         
-        /* Στατικό Frame */
-        .hero-animated-border { position: relative; border-radius: 24px; width: 100%; background: var(--cream); z-index: 1; padding: 4rem 2rem; border: 3px solid var(--cypress); animation: fadeUp 1s var(--ease-out) 0.2s both; }
+        .hero-animated-border { position: relative; border-radius: 24px; width: 100%; background: var(--cream); z-index: 1; padding: 3rem 2rem; border: 3px solid var(--cypress); animation: fadeUp 1s var(--ease-out) 0.2s both; }
 
         .hero-content { display:flex; flex-direction:column; align-items:center; text-align:center; }
         
-        /* Προσθήκη overflow-wrap & hyphens για αποφυγή κοψίματος λέξεων στα κινητά */
-        .hero-title { font-family:var(--serif); font-size:clamp(2rem, 5vw, 3.5rem); font-weight:500; color:var(--cypress); line-height:1.15; margin-bottom:1.5rem; overflow-wrap: break-word; hyphens: auto; -webkit-hyphens: auto; }
+        .hero-title { font-family:var(--serif); font-size:clamp(2rem, 5vw, 3.5rem); font-weight:500; color:var(--cypress); line-height:1.15; margin-bottom:1.25rem; overflow-wrap: break-word; hyphens: auto; -webkit-hyphens: auto; }
         .hero-title em { font-style:italic; color: var(--stone-500); }
-        .hero-desc { font-size:1.15rem; font-style: italic; color:var(--stone-600); max-width:600px; line-height:1.8; margin-bottom: 2.5rem; overflow-wrap: break-word; }
+        .hero-desc { font-size:1.1rem; font-style: italic; color:var(--stone-600); max-width:600px; line-height:1.8; margin-bottom: 2rem; overflow-wrap: break-word; }
         
         .hero-actions { display:flex; flex-direction:column; align-items:center; gap:1rem; }
         .btn-primary { display:inline-flex; align-items:center; gap:0.75rem; padding:1.1rem 2.5rem; background:var(--mint-soft); color:var(--cypress); border-radius:100px; font-size:0.8rem; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; transition:all 0.4s var(--ease-out); }
         .btn-primary:hover { background:var(--mint-hover); transform:translateY(-2px); box-shadow:0 12px 30px rgba(183, 213, 201, 0.4); }
         
-        .hero-subtext { font-size: 0.85rem; color: var(--stone-600); margin-top: 1rem; max-width: 450px; line-height: 1.6; }
+        .hero-subtext { font-size: 0.85rem; color: var(--stone-600); margin-top: 0.75rem; max-width: 450px; line-height: 1.6; }
 
         @media(max-width:900px) {
-            .hero-animated-border { padding: 3rem 1.5rem; }
+            .hero { min-height: auto; padding-top: 100px; padding-bottom: 40px; }
+            .hero-animated-border { padding: 2rem 1.25rem; }
         }
 
         /* ═══ ABOUT & SYSTEMIC ═══ */
         .content-section { padding:clamp(5rem,10vw,8rem) 0; }
         .about-inner { display:grid; grid-template-columns:0.4fr 0.6fr; gap:clamp(3rem,6vw,6rem); align-items:center; }
         .about-image-col { position:relative; }
-        /* Στατική Εικόνα Προφίλ */
-        .about-image-wrap { border-radius:24px; overflow:hidden; box-shadow:0 15px 40px rgba(0,0,0,0.05); background:#ffffff; padding: 1rem; }
-        .about-image-wrap img { width:100%; height:auto; object-fit:contain; border-radius: 16px; }
-        .about-image-accent { position:absolute; top:-15px; left:-15px; width:100%; height:100%; border-radius:24px; border:1px solid var(--sage); z-index:-1; }
+        
+        /* Διορθωμένο στατικό, παχύτερο πλαίσιο χωρίς offset */
+        .about-image-wrap { border-radius:24px; overflow:hidden; box-shadow:0 15px 40px rgba(0,0,0,0.05); background:#ffffff; border: 6px solid var(--sage); padding: 0; }
+        .about-image-wrap img { width:100%; height:auto; object-fit:contain; border-radius: 18px; /* Προσαρμοσμένο ώστε να εφάπτεται σωστά με το εξωτερικό border */ }
         
         .content-block h2 { margin-bottom:2rem; }
         .content-text { font-size:1rem; color:var(--stone-600); line-height:1.9; margin-bottom:1.5rem; }
@@ -175,7 +166,10 @@
         .reviews-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; max-width: 1000px; margin: 0 auto; position: relative; z-index: 1; }
         .review-card { background:#ffffff; border:1px solid var(--stone-200); border-radius:20px; padding:2.5rem; transition:all 0.3s; }
         .review-card:hover { transform:translateY(-4px); box-shadow:0 20px 50px rgba(183,213,202,0.3); }
-        .review-text { font-size:0.95rem; font-style: italic; color:var(--stone-600); line-height:1.8; margin-bottom:1.5rem; }
+        
+        /* Η κλάση `.justified` αφαιρέθηκε από εδώ για να λυθεί το πρόβλημα με τα κενά (rivers) */
+        .review-text { font-size:0.95rem; font-style: italic; color:var(--stone-600); line-height:1.8; margin-bottom:1.5rem; text-align: left; }
+        
         .review-author { font-size:0.85rem; font-weight:700; color:var(--stone-800); text-transform:uppercase; letter-spacing:0.1em; display: flex; align-items: center; gap: 0.5rem; }
         .review-author::before { content:''; display:block; width:20px; height:2px; background:var(--sage); }
 
@@ -201,9 +195,9 @@
         
         .contact-footer { text-align: center; font-size: 0.9rem; color: var(--stone-600); max-width: 600px; margin: 0 auto 4rem; }
         
-        /* Μικρότερη Κάρτα για να μην φαίνεται θολή */
         .business-card-wrap { text-align:center; max-width: 320px; margin: 0 auto; }
-        .business-card-wrap img { width: 100%; height: auto; object-fit: contain; border-radius: 8px; box-shadow: 0 10px 30px rgba(0,0,0,0.08); }
+        .business-card-wrap img { width: 100%; height: auto; object-fit: contain; border-radius: 8px; box-shadow: 0 10px 30px rgba(0,0,0,0.08); transition: transform 0.5s var(--ease-out); }
+        .business-card-wrap img:hover { transform: translateY(-5px); box-shadow: 0 25px 60px rgba(0,0,0,0.12); }
 
         @media(max-width:768px) { .contact-two-col { grid-template-columns: 1fr; gap: 3rem; } .social-buttons { flex-direction: column; } }
 
@@ -262,14 +256,13 @@
     <div class="container about-inner">
         <div class="about-image-col reveal">
             <div class="about-image-wrap"><img src="https://github.com/agelmet/TAVANLI/blob/main/tav1.jpg?raw=true" alt="Χρύσα Μαρία Ταβανλή"></div>
-            <div class="about-image-accent"></div>
         </div>
         <div class="content-block">
             <span class="label reveal">Γνωριμία</span>
             <h2 class="section-title reveal reveal-delay-1" style="margin-top:0.75rem">Σχετικά με εμένα</h2>
             <p class="content-text justified reveal reveal-delay-2">Αν μπορούσα να κατονομάσω μια και μόνη ανάγκη πίσω από την ενασχόλησή μου με τον χώρο της ψυχικής υγείας, θα ήταν σίγουρα η βαθιά μου επιθυμία να δω πώς οι άνθρωποι καταφέρνουν να συνδέονται, να συνδημιουργούν και να πορεύονται. Αυτός ήταν και ο λόγος που, χαράσσοντας την προσωπική μου διαδρομή, διασταυρώθηκα με τη συστημική προσέγγιση.</p>
             <p class="content-text justified reveal reveal-delay-2">Στις συναντήσεις μας είμαι παρούσα, όχι ως «αυθεντία» αλλά ως συνοδοιπόρος και διευκολύντρια σε ένα μονοπάτι προσωπικής αναζήτησης, κάποια σημεία του οποίου χρειάζεται να φωτίσουμε μαζί. Η ακαδημαϊκή μου πορεία ξεκινά από το Τμήμα Ψυχολογίας του ΑΠΘ και συνεχίζεται με την 4ετή μου εκπαίδευση στη Συστημική - Οικογενειακή Θεραπεία στο Ινστιτούτο Συστημικής Σκέψης και Ψυχοθεραπείας Θεσσαλονίκης. Παράλληλα, κατέχω μεταπτυχιακό τίτλο στην Ειδική Εκπαίδευση (Πανεπιστήμιο Λευκωσίας), ενώ η ανάγκη μου για μια πιο συμπεριληπτική ματιά με οδήγησε σε ένα δεύτερο μεταπτυχιακό στις Σπουδές Φύλου (ΕΑΠ), όπου μελετώ κοινωνικά ζητήματα, έμφυλα στερεότυπα και ανισότητες.</p>
-            <p class="content-text justified reveal reveal-delay-2">Η πολυετής επαγγελματική μου πορεία εκτείνεται σε ποικίλους φορείς ψυχικής υγείας και εκπαίδευσης, δουλεύοντας με άτομα από όλο το ηλικιακό φάσμα (παιδιά, εφήβους, ενήλικες). Σήμερα εργάζομαι ως Σχολική Ψυχολόγος στο Υπουργείο Παιδείας ενώ παράλληλα, τον τελευταίο χρόνο δραστηριοποιούμαι και ιδιωτικά, πραγματοποιώντας διαδικτυακές συνεδρίες με άτομα και οικογένειες που αναζητούν ένα σταθερό πλαίσιο υποστήριξης.</p>
+            <p class="content-text justified reveal reveal-delay-2">Η πολυετής επαγγελματική μου πορεία εκτείνεται σε ποικίλους φορείς ψυχικής υγείας και εκπαίδευσης (ΚΕ.Δ.Α.Σ.Υ, Επιτροπή Διεπιστημονικής Υποστηριξης – Ε.Δ.Υ, Κέντρο Κοινότητας, Φορείς Παιδικής Προστασίας.), δουλεύοντας με άτομα από όλο το ηλικιακό φάσμα (παιδιά, εφήβους, ενήλικες). Σήμερα εργάζομαι ως Σχολική Ψυχολόγος στο Υπουργείο Παιδείας ενώ παράλληλα, τον τελευταίο χρόνο δραστηριοποιούμαι και ιδιωτικά, πραγματοποιώντας διαδικτυακές συνεδρίες με άτομα και οικογένειες που αναζητούν ένα σταθερό πλαίσιο υποστήριξης.</p>
         </div>
     </div>
 </section>
@@ -362,39 +355,39 @@
         
         <div class="reviews-grid">
             <div class="review-card reveal">
-                <p class="review-text justified">«Η κυρία Ταβανλή είναι ένα δώρο για τους θεραπευόμενούς της. Από την πρώτη συνεδρία ένιωσα ότι είναι ένα “ασφαλές μέρος” και μια εξαιρετικά καταρτισμένη επαγγελματίας.»</p>
+                <p class="review-text">«Η κυρία Ταβανλή είναι ένα δώρο για τους θεραπευόμενούς της. Από την πρώτη συνεδρία ένιωσα ότι είναι ένα “ασφαλές μέρος” και μια εξαιρετικά καταρτισμένη επαγγελματίας.»</p>
                 <div class="review-author">K.</div>
             </div>
             <div class="review-card reveal reveal-delay-1">
-                <p class="review-text justified">«Έχω μείνει αρκετά ευχαριστημένη, καταλαβαίνει πάντα τα προβλήματά μου και με κάνει να νιώθω ασφάλεια στο να της περιγράφω τα συναισθήματά μου.»</p>
+                <p class="review-text">«Έχω μείνει αρκετά ευχαριστημένη, καταλαβαίνει πάντα τα προβλήματά μου και με κάνει να νιώθω ασφάλεια στο να της περιγράφω τα συναισθήματά μου.»</p>
                 <div class="review-author">Ε.</div>
             </div>
             <div class="review-card reveal reveal-delay-2">
-                <p class="review-text justified">«Είναι ένα άτομο που εμπνέει εμπιστοσύνη και πάντα υπάρχει πολύ ωραίο κλίμα στις συνεδρίες. Πολύ σημαντικό κατά τη γνώμη μου.»</p>
+                <p class="review-text">«Είναι ένα άτομο που εμπνέει εμπιστοσύνη και πάντα υπάρχει πολύ ωραίο κλίμα στις συνεδρίες. Πολύ σημαντικό κατά τη γνώμη μου.»</p>
                 <div class="review-author">Ε.</div>
             </div>
             <div class="review-card reveal">
-                <p class="review-text justified">«Εξαιρετική ψυχολόγος και άνθρωπος. Με επαγγελματισμό, ενσυναίσθηση και πραγματικό ενδιαφέρον, με βοήθησε ουσιαστικά σε μια δύσκολη περίοδο.»</p>
+                <p class="review-text">«Εξαιρετική ψυχολόγος και άνθρωπος. Με επαγγελματισμό, ενσυναίσθηση και πραγματικό ενδιαφέρον, με βοήθησε ουσιαστικά σε μια δύσκολη περίοδο.»</p>
                 <div class="review-author">A.</div>
             </div>
             <div class="review-card reveal reveal-delay-1">
-                <p class="review-text justified">«Από την πρώτη στιγμή ένιωσα μια μοναδική οικειότητα και έναν χώρο απόλυτα ασφαλή. Η βαθιά της ενσυναίσθηση δημιουργεί μια δυσεύρετη αίσθηση προστασίας.»</p>
+                <p class="review-text">«Από την πρώτη στιγμή ένιωσα μια μοναδική οικειότητα και έναν χώρο απόλυτα ασφαλή. Η βαθιά της ενσυναίσθηση δημιουργεί μια δυσεύρετη αίσθηση προστασίας.»</p>
                 <div class="review-author">Π.</div>
             </div>
             <div class="review-card reveal reveal-delay-2">
-                <p class="review-text justified">«Επαγγελματίας με ενσυναίσθηση και ευαισθησία, πλήρως καταρτισμένη στον τομέα της. Αισθάνθηκα ότι με άκουσε και με αποδέχτηκε με σεβασμό.»</p>
+                <p class="review-text">«Επαγγελματίας με ενσυναίσθηση και ευαισθησία, πλήρως καταρτισμένη στον τομέα της. Αισθάνθηκα ότι με άκουσε και με αποδέχτηκε με σεβασμό.»</p>
                 <div class="review-author">A.</div>
             </div>
             <div class="review-card reveal">
-                <p class="review-text justified">«Είναι εξαιρετική σαν άνθρωπος και αυτό φαίνεται στη δουλειά και στη προσέγγισή της! Τη συστήνω ανεπιφύλακτα!»</p>
+                <p class="review-text">«Είναι εξαιρετική σαν άνθρωπος και αυτό φαίνεται στη δουλειά και στη προσέγγισή της! Τη συστήνω ανεπιφύλακτα!»</p>
                 <div class="review-author">Γ.</div>
             </div>
             <div class="review-card reveal reveal-delay-1">
-                <p class="review-text justified">«Η Χρύσα είναι ακριβώς αυτό που έψαχνα τόσο καιρό. Ίσως τα χρόνια της αναζήτησης να ήταν για να βρω αυτό τον άνθρωπο.»</p>
+                <p class="review-text">«Η Χρύσα είναι ακριβώς αυτό που έψαχνα τόσο καιρό. Ίσως τα χρόνια της αναζήτησης να ήταν για να βρω αυτό τον άνθρωπο.»</p>
                 <div class="review-author">Χ.</div>
             </div>
             <div class="review-card reveal reveal-delay-2">
-                <p class="review-text justified">«Άριστη επαγγελματίας. Ευγενική, συνεπής, με ενσυναίσθηση. Με έκανε να νιώσω ασφαλής και άνετα. Τη συνιστώ ανεπιφύλακτα.»</p>
+                <p class="review-text">«Άριστη επαγγελματίας. Ευγενική, συνεπής, με ενσυναίσθηση. Με έκανε να νιώσω ασφαλής και άνετα. Τη συνιστώ ανεπιφύλακτα.»</p>
                 <div class="review-author">Θ.</div>
             </div>
         </div>
@@ -409,6 +402,7 @@
         </div>
         
         <div class="contact-two-col">
+            <!-- Column 1: Φόρμα (Συνδεδεμένη με Formspree) -->
             <div class="reveal">
                 <form class="contact-form" action="https://formspree.io/f/xojzreya" method="POST">
                     <input type="text" name="name" placeholder="Ονοματεπώνυμο" required>
@@ -419,6 +413,7 @@
                 </form>
             </div>
             
+            <!-- Column 2: Εναλλακτικά & Στοιχεία -->
             <div class="contact-alt reveal reveal-delay-1">
                 <p class="contact-alt-text justified">Εναλλακτικά, αν προτιμάτε μια πιο άμεση επικοινωνία, μπορείτε να μου στείλετε μήνυμα στο WhatsApp ή στο Viber.</p>
                 <div class="social-buttons">
@@ -436,7 +431,7 @@
         <p class="contact-footer reveal">Θα επικοινωνήσω μαζί σας εντός 24 ωρών για να επιβεβαιώσουμε τη διαθεσιμότητα και να ορίσουμε την πρώτη μας συνεδρία.</p>
         
         <div class="business-card-wrap reveal">
-            <img src="https://github.com/agelmet/TAVANLI/blob/main/tav2.jpg?raw=true" alt="Επαγγελματική Κάρτα">
+            <img src="YOUR_NEW_IMAGE_URL_HERE" alt="Επαγγελματική Κάρτα">
         </div>
     </div>
 </section>
